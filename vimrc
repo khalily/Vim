@@ -13,6 +13,11 @@ function! MySys()
     return "linux"
   endif
 endfunction
+if has("win32")
+	let g:iswindows = 1
+else
+	let g:iswindows = 0
+endif
 
 """""""""""""""""""""""""""""""""""""""
 "模仿MS快捷键
@@ -132,16 +137,18 @@ set cursorline cursorcolumn
 """""""""""""""""""""""""""""""""""""""
 "Colors and Fonts
 """""""""""""""""""""""""""""""""""""""
-set guifont=Monaco\ 12
 set t_Co=256
 " Set syntax color
-
 if has("gui_running")
   colorscheme vividchalk
-  set mouse-=a
-  "set gfw=幼圆:h10:cGB2312
+  set mouse=a
+  "set guifont=Consolas:h12
+	"set guifontwide=Microsoft\ YaHei:h12
+	set guifont=Monaco:h16
+	 "set guifont=youyuan:h16:w8
 else
   colorscheme vividchalk-term
+	set guifont=Monaco\ 12
 endif
 set ambiwidth=double " 设定某些标点符号为宽字符
 
@@ -216,8 +223,12 @@ let g:Tb_TabWrap = 1
 
 " Tagbar
 
-autocmd VimEnter * nested :call tagbar#autoopen(1)
-let g:tagbar_ctags_bin = "/usr/bin/ctags"
+"autocmd VimEnter * nested :call tagbar#autoopen(1)
+if (!g:iswindows)
+	let g:tagbar_ctags_bin = "/usr/bin/ctags"
+else
+	let g:tagbar_ctags_bin = "ctags"
+endif
 let g:tagbar_right=1
 let g:tagbar_width=30
 let g:tagbar_autofocus = 1
@@ -249,7 +260,7 @@ let NERDTreeIgnore=['\.pyc$', '\.swp$']
 let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
 let NERDTreeShowBookmarks=1
 let NERDTreeWinPos = "left"
-let NERDTreeShowHidden = 0
+let NERDTreeShowHidden = 1
 
 "NeoComplcache
 
@@ -354,11 +365,10 @@ let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " cscope setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:cscope_cmd = "/usr/bin/cscope"
-if(has("win32") || has("win95") || has("win64") || has("win16"))
-		let g:iswindows=1
+if(g:iswindows)
+		let g:cscope_cmd = "~/.vim/tools/cscope"
 else
-		let g:iswindows=0
+		let g:cscope_cmd = "/usr/bin/cscope"
 endif
 autocmd BufEnter * lcd %:p:h
 if has("cscope")
