@@ -44,13 +44,13 @@ if MySys() == "windows"
   "Fast reloading of the _vimrc
   map <silent> <leader>ss :source ~/_vimrc<cr>
   "Fast editing of _vimrc
-  map <silent> <leader>ee :tab sp ~/_vimrc<cr>
+  map <silent> <leader>ee :e ~/_vimrc<cr>
   autocmd! bufwritepost _vimrc source ~/_vimrc
 else
   "Fast reloading of the .vimrc
   map <silent> <leader>ss :source ~/.vimrc<cr>
   "Fast editing of .vimrc
-  map <silent> <leader>ee :tab sp ~/.vimrc<cr>
+  map <silent> <leader>ee :e ~/.vimrc<cr>
   autocmd! bufwritepost .vimrc source ~/.vimrc
   set path=./**,/usr/include/c++/**,/usr/lib/gcc/**
 endif
@@ -71,11 +71,12 @@ if has("gui_running")
   "winpos 0 0
   "set lines=43
   "set columns=85
+	set mousemodel=popup
   set guioptions -=m
   set guioptions -=T
   set guioptions -=L
   set guioptions -=r
-  "set showtabline=0
+	set showtabline=2
 endif
 
 
@@ -120,6 +121,7 @@ set scrolloff=2                                                   " 2 lines abov
 set showmatch
 set showmode
 set ruler
+"let &ro = &ro
 set title                                           " show file in titlebar
 set laststatus=2                                    " use 2 lines for the status bar
 set matchtime=2                        " show matching bracket for 0.2 seconds
@@ -140,15 +142,21 @@ set cursorline cursorcolumn
 set t_Co=256
 " Set syntax color
 if has("gui_running")
-  colorscheme vividchalk
+	colorscheme molokai
+	"colorscheme vividchalk
   set mouse=a
+	if (g:iswindows)
   "set guifont=Consolas:h12
 	"set guifontwide=Microsoft\ YaHei:h12
-	set guifont=Monaco:h16
+		set guifont=Monaco:h14
 	 "set guifont=youyuan:h16:w8
+	else
+		set guifont=Monaco\ 14
+	endif
 else
-  colorscheme vividchalk-term
-	set guifont=Monaco\ 12
+  colorscheme molokai
+  "colorscheme vividchalk-term
+	set guifont=Monaco\ 14
 endif
 set ambiwidth=double " 设定某些标点符号为宽字符
 
@@ -230,37 +238,39 @@ else
 	let g:tagbar_ctags_bin = "ctags"
 endif
 let g:tagbar_right=1
-let g:tagbar_width=30
+let g:tagbar_width=20
 let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
 let g:tagbar_autoshowtag = 1
 let g:tagbar_compact = 1
 " tag for coffee
-if executable('coffeetags')
-  let g:tagbar_type_coffee = {
-        \ 'ctagsbin' : 'coffeetags',
-        \ 'ctagsargs' : '',
-        \ 'kinds' : [
-        \ 'f:functions',
-        \ 'o:object',
-        \ ],
-        \ 'sro' : ".",
-        \ 'kind2scope' : {
-        \ 'f' : 'object',
-        \ 'o' : 'object',
-        \ }
-        \ }
-endif
+""if executable('coffeetags')
+  "let g:tagbar_type_coffee = {
+        "\ 'ctagsbin' : 'coffeetags',
+        "\ 'ctagsargs' : '',
+        "\ 'kinds' : [
+        "\ 'f:functions',
+        "\ 'o:object',
+        "\ ],
+        "\ 'sro' : ".",
+        "\ 'kind2scope' : {
+        "\ 'f' : 'object',
+        "\ 'o' : 'object',
+        "\ }
+        "\ }
+"endif
 
 " Nerd Tree 
 let NERDChristmasTree=0
-let NERDTreeWinSize=30
+let ERDTreeAutoCenter=1
+let NERDTreeAutoCenterThreshold=1
+let NERDTreeWinSize=16
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\.pyc$', '\.swp$']
 let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
 let NERDTreeShowBookmarks=1
 let NERDTreeWinPos = "left"
-let NERDTreeShowHidden = 1
+let NERDTreeShowHidden = 0
 
 "NeoComplcache
 
@@ -302,9 +312,9 @@ imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
@@ -312,7 +322,7 @@ inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
 " AutoComplPop like behavior.
-"let g:neocomplcache_enable_auto_select = 1
+let g:neocomplcache_enable_auto_select = 1
 
 " Shell like behavior(not recommended).
 "set completeopt+=longest
@@ -362,6 +372,12 @@ let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 " ack
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
+" A.vim
+map <F12> :A<cr>
+
+"vim-cpp-auto-include 
+autocmd BufWritePre ~/desktop/**.cpp :ruby CppAutoInclude::process
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " cscope setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -373,8 +389,8 @@ endif
 autocmd BufEnter * lcd %:p:h
 if has("cscope")
 	set csprg=/usr/bin/cscope
-	set csto=1
 	set cst
+	set csto=0
 endif
 function! Do_CsTag()
 		let dir = getcwd()
@@ -431,10 +447,10 @@ function! Do_CsTag()
 						set nocsverb
 						execute "cs add cscope.out"
 						set csverb
-						"execute"set cscopequickfix=s-,c-,d-,i-,t-,e-"
+						execute"set cscopequickfix=s-,c-,d-,i-,t-,e-"
 				endif
 		endif
-		source ~/.vimrc
+		"source ~/.vimrc
 endfunction
 
 map <F8> :call Do_CsTag()<CR>
@@ -459,6 +475,7 @@ nmap <C-I>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <C-I>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-I>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-I>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <C-I>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
 "  pygdb 
@@ -466,14 +483,14 @@ nmap <C-I>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 "autocmd Filetype c,cpp :python import sys 
 "autocmd Filetype c,cpp :python import vim 
-"autocmd Filetype c,cpp :python pygdbdir = "~/.vim/bundle/pygdb/plugin" 
+"autocmd Filetype c,cpp :python pygdbdir = "/home/khalil/.vim/tools/pygdb" 
 "autocmd Filetype c,cpp :python sys.path.append(pygdbdir) 
 "autocmd Filetype c,cpp :python vim.command("source %s/pygdb.vim" % pygdbdir) 
 "autocmd Filetype c,cpp call GDBMapDefaults() 
 
 
-autocmd FileType python let g:pydiction_location = '~/.vim/Pydiction/complete-dict'
-
+let g:pydiction_location = '~/.vim/Pydiction/complete-dict'
+"autocmd FileType python colorscheme molokai
 "< F7> 编译和运行C++
 autocmd FileType c,cpp  map <buffer> <leader><space> :w<cr>:make<cr>
 
@@ -483,7 +500,7 @@ nmap <leader>cw :cw 10<cr>
 autocmd FileType c,cpp map <F7> :call CompileRunGpp()<CR>
 func! CompileRunGpp()
 exec "w"
-exec "!g++ % -o %<"
+exec "!g++ -g -Wall % -o %<"
 exec "! ./%<"
 endfunc
  

@@ -35,7 +35,8 @@ Bundle 'sjl/gundo.vim'
 Bundle 'Raimondi/delimitMate'
 Bundle 'Lokaltog/vim-powerline'
 "Bundle 'nvie/vim-togglemouse'
-"Bundle 'quark-zju/vim-cpp-auto-include' " require ruby support
+"Bundle 'quark-zju/vim-cpp-auto-include' 
+" require ruby support
 "Bundle 'vim-scripts/pygdb.git'
 "Bundle 'vim-scripts/Conque-Shell'
 Bundle 'tsaleh/vim-matchit'
@@ -52,8 +53,6 @@ Bundle 'vim-scripts/a.vim'
 "--------------
 " Color Scheme
 "--------------
-Bundle 'rickharris/vim-blackboard'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'rickharris/vim-monokai'
 Bundle 'tpope/vim-vividchalk'
 
