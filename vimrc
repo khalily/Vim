@@ -144,16 +144,16 @@ set t_Co=256
 " Set syntax color
 if has("gui_running")
 	colorscheme molokai
-	"colorscheme sonofobsidian
 	"colorscheme vividchalk
   set mouse=a
 	if (g:iswindows)
-  "set guifont=Consolas:h12
-	"set guifontwide=Microsoft\ YaHei:h12
+	" Auto Maximize when vim starts.
+		au GUIEnter * simalt ~x
 		set guifont=Monaco:h14
-	 "set guifont=youyuan:h16:w8
 	else
 		set guifont=Monaco\ 14
+		au GUIEnter * winpos 0 0
+		set lines=31 columns=126
 	endif
 else
   colorscheme molokai
@@ -198,9 +198,12 @@ if has("gui_running")
 endif
 
 " Keybindings for plugin toggle
-nmap <F9> :TagbarToggle<cr>
-nmap <F4> :NERDTreeToggle<cr>
-nmap <F3> :GundoToggle<cr>
+"nmap <F9> :TagbarToggle<cr>
+"nmap <F4> :NERDTreeToggle<cr>
+"nmap <F3> :GundoToggle<cr>
+map <leader>t :TagbarToggle<cr>
+map <leader>fe :NERDTreeToggle<cr>
+map <leader>gt :GundoToggle<cr>
 
 " 用空格键来开关折叠
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
@@ -273,7 +276,7 @@ let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
 let NERDTreeShowBookmarks=1
 let NERDTreeWinPos = "left"
 let NERDTreeShowHidden = 0
-
+let g:NERDTreeChDirMode = 2
 "NeoComplcache
 
 "" Disable AutoComplPop.
@@ -378,7 +381,7 @@ let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 map <F12> :A<cr>
 
 "vim-cpp-auto-include 
-autocmd BufWritePre ~/desktop/**.cpp :ruby CppAutoInclude::process
+autocmd BufWritePre ~/workspace/c++/**.cpp :ruby CppAutoInclude::process
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " cscope setting
@@ -492,7 +495,6 @@ let g:pydiction_location = '~/.vim/Pydiction/complete-dict'
 "autocmd FileType python colorscheme molokai
 "< F7> 编译和运行C++
 autocmd FileType c,cpp  map <buffer> <leader><space> :w<cr>:make<cr>
-
 nmap <leader>cn :cn<cr>
 nmap <leader>cp :cp<cr>
 nmap <leader>cw :cw 10<cr> 
