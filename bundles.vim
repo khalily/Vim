@@ -12,20 +12,27 @@ Bundle 'gmarik/vundle'
 " Code Completions
 "------------------
 Bundle 'Shougo/neocomplcache'
-Bundle 'mattn/emmet-vim'
+Bundle 'Shougo/neosnippet'
+Bundle 'Shougo/neosnippet-snippets'
+" Bundle 'mattn/emmet-vim'
 Bundle 'Raimondi/delimitMate'
 Bundle 'ervandew/supertab'
 " snippets
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/vim-snippets'
+" Bundle 'garbas/vim-snipmate'
+" Bundle 'honza/vim-snippets'
 "------ snipmate dependencies -------
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
+" Bundle 'MarcWeber/vim-addon-mw-utils'
+" Bundle 'tomtom/tlib_vim'
+
+"-----------------
+" Code navigation
+"-----------------
+Bundle 'vim-scripts/cscope'
 
 "-----------------
 " Fast navigation
 "-----------------
-Bundle 'tsaleh/vim-matchit'
+"Bundle 'tsaleh/vim-matchit'
 Bundle 'Lokaltog/vim-easymotion'
 
 "--------------
@@ -60,17 +67,17 @@ Bundle 'nvie/vim-togglemouse'
 " Syntax/Indent for language enhancement
 "----------------------------------------
 "------- web backend ---------
-Bundle '2072/PHP-Indenting-for-VIm'
+" Bundle '2072/PHP-Indenting-for-VIm'
 "Bundle 'tpope/vim-rails'
-Bundle 'lepture/vim-jinja'
+" Bundle 'lepture/vim-jinja'
 "Bundle 'digitaltoad/vim-jade'
 
 "------- web frontend ----------
-Bundle 'othree/html5.vim'
+" Bundle 'othree/html5.vim'
 " Bundle 'tpope/vim-haml'
-Bundle 'pangloss/vim-javascript'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'nono/jquery.vim'
+" Bundle 'pangloss/vim-javascript'
+" Bundle 'kchmck/vim-coffee-script'
+" Bundle 'nono/jquery.vim'
 " Bundle 'groenewege/vim-less'
 " Bundle 'wavded/vim-stylus'
 " Bundle 'nono/vim-handlebars'
@@ -83,10 +90,15 @@ Bundle 'tpope/vim-markdown'
 " Bundle 'tpope/vim-endwise'
 
 "------- Go ----------
-Bundle 'jnwhiteh/vim-golang'
+" Bundle 'jnwhiteh/vim-golang'
+" Bundle 'blackrush/vim-gocode'
+Bundle 'fatih/vim-go'
+
+"-------Python ------
+Bundle 'klen/python-mode'
 
 "------- FPs ------
-Bundle 'kien/rainbow_parentheses.vim'
+" Bundle 'kien/rainbow_parentheses.vim'
 " Bundle 'wlangstroth/vim-racket'
 " Bundle 'vim-scripts/VimClojure'
 " Bundle 'rosstimson/scala-vim-support'
