@@ -12,12 +12,15 @@ Bundle 'gmarik/vundle'
 "------------------
 " Code Completions
 "------------------
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/neosnippet'
-Bundle 'Shougo/neosnippet-snippets'
+"Bundle 'Shougo/neocomplcache'
+"Bundle 'Shougo/neosnippet'
+"Bundle 'Shougo/neosnippet-snippets'
 " Bundle 'mattn/emmet-vim'
 Bundle 'Raimondi/delimitMate'
-Bundle 'ervandew/supertab'
+"Bundle 'ervandew/supertab'
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
+
 " snippets
 " Bundle 'garbas/vim-snipmate'
 " Bundle 'honza/vim-snippets'
@@ -91,9 +94,10 @@ Bundle 'tpope/vim-markdown'
 " Bundle 'tpope/vim-endwise'
 
 "------- Go ----------
-" Bundle 'jnwhiteh/vim-golang'
-" Bundle 'blackrush/vim-gocode'
+"Bundle 'jnwhiteh/vim-golang'
+"Bundle 'blackrush/vim-gocode'
 Bundle 'fatih/vim-go'
+Bundle 'Valloric/YouCompleteMe'
 
 "-------Python ------
 Bundle 'klen/python-mode'
